@@ -22,7 +22,7 @@ function Modal() {
             <h3>Frontend</h3>
             <ul>
               <li>React</li>
-              <li>API Posts</li>
+              <li>TypeScript</li>
               <li>React Icons</li>
             </ul>
           </div>

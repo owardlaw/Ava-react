@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { FaConnectdevelop } from "react-icons/fa6";
 import { GoCommandPalette } from "react-icons/go";
 import Modal from "./Modal";
+import { store } from "./store";
 
 import "./EditableDiv";
 
