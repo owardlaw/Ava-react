@@ -42,7 +42,7 @@
     justify-content: space-evenly;
 }
 
-.Modal-close {
+.Modal Button {
     background-color: #276e66;
     padding: 15px 40px;
     border-radius: 8px;
@@ -51,7 +51,7 @@
     margin-left: auto;
 }
 
-.Modal-close:hover {
+.Modal Button:hover {
     background-color: #21433f;
 }
 

@@ -1,10 +1,14 @@
 import "./App.css";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FaConnectdevelop } from "react-icons/fa6";
 import { GoCommandPalette } from "react-icons/go";
 import Modal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { setContent, addMessage, setMessages } from "./chatSlice";
+import axios from "axios";
+import Button from "@mui/material/Button";
+import Hamburger from "hamburger-react";
+import PopOutMenu from "./PopOutMenu";
 
 import "./EditableDiv";
 
@@ -13,6 +17,7 @@ function App() {
 
   const content = useSelector((state) => state.chat.content);
   const messages = useSelector((state) => state.chat.messages);
+  const [isOpen, setOpen] = useState(false);
 
   const divRef = useRef(null);
   const messageListRef = useRef(null);
@@ -37,6 +42,7 @@ function App() {
     console.log(content);
     dispatch(setContent(""));
     divRef.current.textContent = "";
+    dispatch(setMessages([]));
   };
 
   const handlePost = async () => {
@@ -46,17 +52,21 @@ function App() {
     dispatch(addMessage({ type: "user", text: content }));
 
     try {
-      const response = await fetch("https://api.automata.blue/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "https://api.automata.blue/chat",
+        {
+          message: content,
         },
-        body: JSON.stringify({ message: content }),
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       clear();
 
-      const data = await response.json();
+      const data = response.data;
 
       // Store the response in the messages array
       dispatch(addMessage({ type: "bot", text: data.message }));
@@ -84,6 +94,17 @@ function App() {
   return (
     <div className="App">
       <Modal />
+      <div className="hamburger">
+        <div id="hamburg">
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+        </div>
+        {isOpen && 
+        
+        <PopOutMenu clear={clear}/>
+        
+        }
+      </div>
+
       <div className="container">
         <div className="chat-container">
           <div className="title">
@@ -111,9 +132,9 @@ function App() {
               data-placeholder="Write a message here..."
             ></div>
 
-            <button onClick={handlePost}>
+            <Button onClick={handlePost}>
               <GoCommandPalette size={20} className="AiFillThunderbolt" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
