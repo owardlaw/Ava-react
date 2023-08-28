@@ -1,38 +1,41 @@
 import "./App.css";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { FaConnectdevelop } from "react-icons/fa6";
 import { GoCommandPalette } from "react-icons/go";
 import Modal from "./Modal";
-import { store } from "./store";
+import { useSelector, useDispatch } from "react-redux";
+import { setContent, addMessage, setMessages } from "./chatSlice";
 
 import "./EditableDiv";
 
 function App() {
-  const [content, setContent] = useState("");
-  const [messages, setMessages] = useState([]);
+  const dispatch = useDispatch();
+
+  const content = useSelector((state) => state.chat.content);
+  const messages = useSelector((state) => state.chat.messages);
 
   const divRef = useRef(null);
   const messageListRef = useRef(null);
 
   const handleFocus = () => {
     if (!content.trim()) {
-      setContent("");
+      dispatch(setContent(""));
     }
   };
 
   const handleBlur = () => {
     if (!content.trim()) {
-      setContent("");
+      dispatch(setContent(""));
     }
   };
 
   const handleInput = () => {
-    setContent(divRef.current.textContent);
+    dispatch(setContent(divRef.current.textContent)); // Use dispatch here
   };
 
   const clear = () => {
     console.log(content);
-    setContent("");
+    dispatch(setContent(""));
     divRef.current.textContent = "";
   };
 
@@ -40,7 +43,7 @@ function App() {
     // Store user's message in the messages array
     scrollToBottom();
 
-    setMessages([...messages, { type: "user", text: content }]);
+    dispatch(addMessage({ type: "user", text: content }));
 
     try {
       const response = await fetch("https://api.automata.blue/chat", {
@@ -56,20 +59,13 @@ function App() {
       const data = await response.json();
 
       // Store the response in the messages array
-      setMessages([
-        ...messages,
-        { type: "user", text: content },
-        { type: "bot", text: data.message },
-      ]);
+      dispatch(addMessage({ type: "bot", text: data.message }));
 
       scrollToBottom();
-
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
-
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter" || e.keyCode === 13) {
@@ -80,7 +76,8 @@ function App() {
 
   const scrollToBottom = () => {
     if (messageListRef.current) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight + 1000;
+      messageListRef.current.scrollTop =
+        messageListRef.current.scrollHeight + 1000;
     }
   };
 
@@ -117,7 +114,6 @@ function App() {
             <button onClick={handlePost}>
               <GoCommandPalette size={20} className="AiFillThunderbolt" />
             </button>
-      
           </div>
         </div>
       </div>
