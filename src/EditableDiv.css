@@ -1,0 +1,44 @@
+.input-div:empty:before {
+    content: attr(data-placeholder);
+    color: #a9a9a9;
+}
+
+.input-div.empty:before {
+    content: attr(data-placeholder);
+    color: #a9a9a9;
+}
+
+.input-div {
+    background-color: inherit;
+    text-align: left;
+    padding: 15px;
+    border: 2px solid #454545;
+}
+
+.message-container {
+    background-color: inherit;
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    width: 80%;
+    align-items: center;
+    border: none;
+}
+
+.message-container button {
+    background-color: #276e66;
+    margin: 0px 18px;
+    width: 58px;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-container button:hover {
+    background-color: #21433f;
+}
