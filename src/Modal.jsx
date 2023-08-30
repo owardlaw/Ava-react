@@ -15,7 +15,7 @@ function Modal() {
           <h1>GPT Clone</h1>
           <p>
             This is a clone of the OpenAI GPT-3.5 Playground. It is a web app
-            that uses the OpenAI API to generate text based on user input.
+            that inferences a GGML model hosted on an Ec2 instance.
           </p>
         </div>
         <div className="stack">

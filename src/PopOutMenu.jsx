@@ -6,8 +6,7 @@ export default function PopOutMenu({ clear }) {
   return (
     <div className="PopOutMenu-container">
       <Button variant="contained" onClick={clear}>
-        {" "}
-        Clear Chat{" "}
+        Clear Chat
       </Button>
       <p>
         This is a Chat GPT clone created by Owen Wardlaw. It uses the OpenAI API
