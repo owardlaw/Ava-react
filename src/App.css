@@ -89,7 +89,7 @@
 }
 
 .message.bot {
-  align-self: flex-start;
+  align-self: flex-;
   background-color: #d6d6d6;
   color: black;
   margin: 0px 15px;

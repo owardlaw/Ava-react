@@ -3,8 +3,8 @@
   width: 25vw;
   background-color: rgb(28, 28, 28);
   padding-top: 40px;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
 }
