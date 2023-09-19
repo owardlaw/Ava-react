@@ -64,8 +64,6 @@ function App() {
         }
       );
 
-      clear();
-
       const data = response.data;
 
       // Store the response in the messages array
