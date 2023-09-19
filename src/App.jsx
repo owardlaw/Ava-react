@@ -97,9 +97,7 @@ function App() {
           <Hamburger toggled={isOpen} toggle={setOpen} />
         </div>
         {isOpen && 
-        
-        <PopOutMenu clear={clear}/>
-        
+        <PopOutMenu clear={clear} className="popout"/>
         }
       </div>
 
@@ -112,7 +110,7 @@ function App() {
 
           <div className="message-list" ref={messageListRef}>
             {messages.map((message, index) => (
-              <div key={index} className={`message ${message.type}`}>
+              <div key={index} id="message" className={`message ${message.type}`}>
                 {message.text}
               </div>
             ))}

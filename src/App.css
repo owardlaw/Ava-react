@@ -158,3 +158,22 @@ button {
 .AiFillThunderbolt {
   background-color: inherit;
 }
+
+
+@keyframes popin {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+
+#message {
+  opacity: 0;
+  animation: popin 0.1s ease-in-out forwards;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+}

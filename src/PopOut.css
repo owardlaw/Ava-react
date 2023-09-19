@@ -7,6 +7,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  box-shadow: 1px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
 .PopOutMenu-container p {
