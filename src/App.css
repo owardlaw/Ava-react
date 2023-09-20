@@ -176,4 +176,5 @@ button {
   opacity: 0;
   animation: popin 0.1s ease-in-out forwards;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+  width: fit-content;
 }
