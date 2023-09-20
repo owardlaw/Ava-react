@@ -51,6 +51,8 @@ function App() {
 
     dispatch(addMessage({ type: "user", text: content }));
 
+    divRef.current.textContent = "";
+
     try {
       const response = await axios.post(
         "https://api.automata.blue/chat",
@@ -96,9 +98,7 @@ function App() {
         <div id="hamburg">
           <Hamburger toggled={isOpen} toggle={setOpen} />
         </div>
-        {isOpen && 
-        <PopOutMenu clear={clear} className="popout"/>
-        }
+        {isOpen && <PopOutMenu clear={clear} className="popout" />}
       </div>
 
       <div className="container">
@@ -110,14 +110,17 @@ function App() {
 
           <div className="message-list" ref={messageListRef}>
             {messages.map((message, index) => (
-              <div key={index} id="message" className={`message ${message.type}`}>
-                {message.text}
-              </div>
+              <p
+                key={index}
+                id="chat"
+                className={`${message.type}`}
+              > {message.text}</p>
             ))}
           </div>
 
           <div className="message-container">
             <div
+              id="message-input"
               ref={divRef}
               className={`input-div ${!content.trim() && "empty"}`}
               contentEditable={true}
