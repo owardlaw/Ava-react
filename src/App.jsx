@@ -18,8 +18,11 @@ function App() {
   const content = useSelector((state) => state.chat.content);
   const messages = useSelector((state) => state.chat.messages);
   const [isOpen, setOpen] = useState(false);
+  const [persona, setPersona] = useState("");
 
   const divRef = useRef(null);
+  const personaRef = useRef(null);
+
   const messageListRef = useRef(null);
 
   const handleFocus = () => {
@@ -39,7 +42,6 @@ function App() {
   };
 
   const clear = () => {
-    console.log(content);
     dispatch(setContent(""));
     divRef.current.textContent = "";
     dispatch(setMessages([]));
@@ -55,9 +57,10 @@ function App() {
 
     try {
       const response = await axios.post(
-        "https://api.automata.blue/chat",
+        "https://api.automata.blue/persona",
         {
           message: content,
+          persona: persona,
         },
         {
           headers: {
@@ -91,6 +94,11 @@ function App() {
     }
   };
 
+  const updatePersona = () => {
+    console.log(personaRef.current.textContent);
+    setPersona(personaRef.current.textContent);
+  };
+
   return (
     <div className="App">
       <Modal />
@@ -104,9 +112,21 @@ function App() {
       <div className="container">
         <div className="chat-container">
           <div className="title">
-            <FaConnectdevelop size={45} />
-            <h1>GPT Clone</h1>
+            <div className="title__container">
+              <FaConnectdevelop size={45} />
+              <h1>GPT Clone</h1>
+            </div>
+            <div
+              id="persona-input"
+              ref={personaRef}
+              className={"input-div"}
+              contentEditable={true}
+              onInput={updatePersona}
+              data-placeholder="Write a persona here: Your name is Jake from state farm and..."
+            ></div>
           </div>
+
+
 
           <div className="message-list" ref={messageListRef}>
             {messages.map((message, index) => (
