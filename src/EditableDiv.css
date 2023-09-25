@@ -42,3 +42,16 @@
 .message-container button:hover {
     background-color: #21433f;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+  
+    #persona-input {
+      width: 90%;
+    }
+  
+    .message-container {
+      width: 100%;
+    }
+  }

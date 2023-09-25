@@ -28,3 +28,10 @@
 .PopOutMenu-container button:hover {
     background-color: #1d5750;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .PopOutMenu-container {
+        width: 100%
+    }
+}
